@@ -20,10 +20,23 @@ app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   res.render("home", {
+    activeTab: "home",
     homeStartingContent: homeStartingContent,
     aboutContent: aboutContent,
     contactContent: contactContent,
   });
+});
+
+app.get("/about", (req, res) => {
+  res.render("about", { activeTab: "about" });
+});
+
+app.get("/contact", (req, res) => {
+  res.render("contact", { activeTab: "contact" });
+});
+
+app.get("/customers", (req, res) => {
+  res.render("customers", { activeTab: "customers" });
 });
 
 app.listen(3000, () => {

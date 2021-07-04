@@ -19,7 +19,8 @@
 }
 
 .navbar-brand,
-a:hover {
+a:hover,
+li a.active {
   color: #1abc9c !important;
   font-weight: 800;
   border-bottom: 1px solid #1abc9c;
