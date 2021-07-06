@@ -63,10 +63,55 @@ app.get("/customers", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(docs);
+      res.render("customers", {
+        activeTab: "customers",
+        customers: docs,
+        custName: custName,
+        custBalance: custBalance,
+      });
     }
   });
-  res.render("customers", { activeTab: "customers" });
+});
+
+let custName = "";
+let custBalance = "";
+let recieverName = "";
+
+app.get("/customers/:custName1", (req, res) => {
+  let name = req.params.custName1;
+  Customer.findOne({ name: name }, (err, doc) => {
+    if (err) {
+      console.log(err);
+    } else {
+      custName = doc.name;
+      custBalance = doc.balance;
+      Customer.find((err, docs) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("customer", {
+            activeTab: "customers",
+            customers: docs,
+            custName: custName,
+            custBalance: custBalance,
+            reqParams: name,
+            recieverName: recieverName,
+          });
+        }
+      });
+    }
+  });
+});
+
+app.post("/customer", (req, res) => {
+  const name = req.body.selectedCustomerName;
+  res.redirect("/customers/" + name);
+});
+
+app.post("/customer/transaction", (req, res) => {
+  const name1 = req.body.selectedCustomerName1;
+  recieverName = req.body.selectedCustomerName2;
+  res.redirect("/customers/" + name1);
 });
 
 app.listen(PORT, () => {

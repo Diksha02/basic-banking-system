@@ -1,7 +1,18 @@
 <%- include('header'); -%>
 
 <div class="container" style="margin-top: 10%">
-  <h3>Select a customer to carry out a transaction</h3>
+  <form action="/customer/<%= custName %>" method="post">
+    <div class="first-cust card">
+      <div class="card-title"><%= custName %></div>
+      <div class="card-title"><%= custBalance %></div>
+      <input type="number" name="amount" id="amount" />
+      <div class="card-title">To: <%= recieverName %></div>
+      <button type="submit">Transfer</button>
+    </div>
+  </form>
+  <br />
+  <h3>Select an account from below to carry out the transaction</h3>
+
   <div class="container customer-table">
     <div class="row customer-header-row" style="background-color: #1abc9c">
       <div class="col">Customer Id</div>
@@ -9,11 +20,16 @@
       <div class="col">Balance Amount</div>
     </div>
     <% for( let i = 0; i < customers.length; i++ ) { %>
-    <form action="/customer" method="POST">
+    <form action="/customer/transaction" method="post">
       <div class="row customer-row" onclick="this.parentNode.submit()">
         <input
           type="hidden"
-          name="selectedCustomerName"
+          name="selectedCustomerName1"
+          value="<%= custName %>"
+        />
+        <input
+          type="hidden"
+          name="selectedCustomerName2"
           value="<%= customers[i].name %>"
         />
         <div class="col"><%= i+1 %></div>
