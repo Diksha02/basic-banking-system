@@ -29,6 +29,7 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
+    useFindAndModify: false,
   }
 );
 
@@ -85,7 +86,7 @@ app.get("/customers/:custName1", (req, res) => {
     } else {
       custName = doc.name;
       custBalance = doc.balance;
-      Customer.find((err, docs) => {
+      Customer.find({ name: { $ne: name } }, (err, docs) => {
         if (err) {
           console.log(err);
         } else {
@@ -103,9 +104,40 @@ app.get("/customers/:custName1", (req, res) => {
   });
 });
 
+app.post("/customers/:custName1", (req, res) => {
+  let custName = req.params.custName1;
+  let custBalance = req.body.custBalance;
+  let amount = req.body.amount;
+  let recieverName = req.body.recieverName;
+
+  custBalance = custBalance - amount;
+
+  Customer.findOneAndUpdate(
+    { name: custName },
+    { balance: custBalance },
+    (err, doc) => {
+      if (err) {
+        return console.log(err);
+      }
+      Customer.findOneAndUpdate(
+        { name: recieverName },
+        { $inc: { balance: amount } },
+        (err, doc) => {
+          if (err) {
+            return console.log(err);
+          }
+
+          res.render("sucess");
+        }
+      );
+    }
+  );
+});
+
 app.post("/customer", (req, res) => {
   const name = req.body.selectedCustomerName;
   res.redirect("/customers/" + name);
+  recieverName = "";
 });
 
 app.post("/customer/transaction", (req, res) => {

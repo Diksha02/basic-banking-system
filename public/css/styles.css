@@ -62,12 +62,36 @@ li a.active {
 .customer-header-row,
 .customer-row {
   padding: 1rem;
-  background-color: antiquewhite;
+  background-color: #dff9fb;
   margin: 10px auto auto;
   width: 70%;
 }
 
 .customer-header-row,
 .customer-row:hover {
+  background-color: #1abc9c;
+}
+
+.first-cust {
+  background-color: #dff9fb;
+}
+
+.btn {
+  background-color: #4aeecd;
+  box-shadow: 0 2px #666;
+}
+
+.btn:active,
+.btn:focus,
+.btn:focus:active {
+  background-color: #1abc9c;
+  box-shadow: 0 2px #666;
+}
+.btn:active {
+  background-color: #1abc9c;
+  transform: translateY(2px);
+}
+
+.btn:hover {
   background-color: #1abc9c;
 }

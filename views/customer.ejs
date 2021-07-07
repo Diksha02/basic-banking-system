@@ -1,13 +1,47 @@
 <%- include('header'); -%>
 
 <div class="container" style="margin-top: 10%">
-  <form action="/customer/<%= custName %>" method="post">
+  <form
+    action="/customers/<%= custName %>"
+    method="post"
+    class="transaction-form"
+  >
     <div class="first-cust card">
-      <div class="card-title"><%= custName %></div>
-      <div class="card-title"><%= custBalance %></div>
-      <input type="number" name="amount" id="amount" />
-      <div class="card-title">To: <%= recieverName %></div>
-      <button type="submit">Transfer</button>
+      <div class="card-body">
+        <div class="card-title customer1">
+          From: <strong><%= custName %></strong>
+        </div>
+        <div class="card-title customer1Balance">
+          <%= custName %>'s current balance: <strong><%= custBalance %></strong>
+        </div>
+        <input
+          type="hidden"
+          id="custBalance"
+          name="custBalance"
+          value="<%= custBalance %>"
+        />
+        <div class="card-title">To: <strong><%= recieverName %></strong></div>
+        <input
+          type="number"
+          name="amount"
+          id="amount"
+          placeholder="Amount"
+          min="1"
+          max="<%= custBalance %>"
+          width="300px"
+          required
+        />
+        <script>
+          console.log(document.getElementById("amount").value);
+        </script>
+        <input
+          type="hidden"
+          id="recieverName"
+          name="recieverName"
+          value="<%= recieverName %>"
+        />
+        <button type="submit" class="btn btn-info">Transfer</button>
+      </div>
     </div>
   </form>
   <br />
