@@ -78,7 +78,7 @@ li a.active {
 
 .btn {
   background-color: #4aeecd;
-  box-shadow: 0 2px #666;
+  box-shadow: 1px 2px #666;
 }
 
 .btn:active,
@@ -87,11 +87,42 @@ li a.active {
   background-color: #1abc9c;
   box-shadow: 0 2px #666;
 }
+.form-control:active,
+.form-control:focus,
+.form-control:focus:active {
+  box-shadow: none;
+}
+
 .btn:active {
   background-color: #1abc9c;
-  transform: translateY(2px);
+  transform: translate(1px, 2px);
 }
 
 .btn:hover {
   background-color: #1abc9c;
+}
+
+.success {
+  text-align: center;
+  margin: 14% auto;
+  background-color: #4aeecd;
+  width: fit-content;
+  padding: 3rem;
+  border-radius: 5px;
+}
+.success-a {
+  text-decoration: none;
+  color: #fff;
+  font-size: large;
+}
+
+.container.about,
+.container.contact {
+  margin-top: 10%;
+  height: 100vh;
+}
+
+.transaction-form {
+  width: 50%;
+  margin: 0 auto;
 }

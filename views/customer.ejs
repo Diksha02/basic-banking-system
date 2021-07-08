@@ -20,27 +20,32 @@
           name="custBalance"
           value="<%= custBalance %>"
         />
-        <div class="card-title">To: <strong><%= recieverName %></strong></div>
-        <input
-          type="number"
-          name="amount"
-          id="amount"
-          placeholder="Amount"
-          min="1"
-          max="<%= custBalance %>"
-          width="300px"
-          required
-        />
-        <script>
-          console.log(document.getElementById("amount").value);
-        </script>
+        <div class="card-title">
+          <% if (recieverName) { %> To: <strong><%= recieverName%></strong> <% }
+          else { %>
+          <p>To: ---Please Select an account from below---</p>
+          <% } %>
+        </div>
         <input
           type="hidden"
           id="recieverName"
           name="recieverName"
           value="<%= recieverName %>"
         />
-        <button type="submit" class="btn btn-info">Transfer</button>
+        <div class="input-group">
+          <input
+            type="number"
+            name="amount"
+            class="form-control"
+            id="amount"
+            placeholder="Amount"
+            min="1"
+            max="<%= custBalance %>"
+            width="200px"
+            required
+          />
+          <button type="submit" class="btn btn-info">Transfer</button>
+        </div>
       </div>
     </div>
   </form>

@@ -52,11 +52,14 @@ app.get("/", (req, res) => {
 });
 
 app.get("/about", (req, res) => {
-  res.render("about", { activeTab: "about" });
+  res.render("about", { activeTab: "about", aboutContent: aboutContent });
 });
 
 app.get("/contact", (req, res) => {
-  res.render("contact", { activeTab: "contact" });
+  res.render("contact", {
+    activeTab: "contact",
+    contactContent: contactContent,
+  });
 });
 
 app.get("/customers", (req, res) => {
@@ -127,7 +130,7 @@ app.post("/customers/:custName1", (req, res) => {
             return console.log(err);
           }
 
-          res.render("sucess");
+          res.redirect("/success");
         }
       );
     }
@@ -144,6 +147,14 @@ app.post("/customer/transaction", (req, res) => {
   const name1 = req.body.selectedCustomerName1;
   recieverName = req.body.selectedCustomerName2;
   res.redirect("/customers/" + name1);
+});
+
+app.get("/success", (req, res) => {
+  res.render("success");
+});
+
+app.get("*", (req, res) => {
+  res.send("<h1>404 NOT FOUND</h1>");
 });
 
 app.listen(PORT, () => {
